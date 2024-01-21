@@ -56,6 +56,7 @@
       z-index: 1;
       position: relative;
       border: 2px solid transparent;
+      background-color: $gray;
       &:hover {
         text-decoration: none;
         transform: skew(-4deg, 3deg);

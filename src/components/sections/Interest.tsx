@@ -66,7 +66,7 @@ export function Interest() {
                   height={300}
                   width={300}
                   alt="interest"
-                  src="/assets/images/int7.jpg"
+                  src="/assets/images/int7.JPG"
                 />
               </Col>
               <Col xs={12} sm={8} md={8} lg={6} xl={6}>
