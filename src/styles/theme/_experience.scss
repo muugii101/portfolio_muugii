@@ -1,0 +1,175 @@
+.experience {
+  background-color: $black !important;
+  cursor: url("/assets/images/download_cursor.png") 64 64, auto !important;
+  z-index: 1;
+  position: relative;
+  &-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+      width: 100%;
+      max-width: 500px;
+      position: sticky;
+      top: 32px;
+      h1 {
+        font-size: $title;
+        font-weight: bold;
+        padding-bottom: 24px;
+        margin-top: 0;
+        position: relative;
+        display: flex;
+        margin: 0;
+        color: $white;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(
+            90deg,
+            #8b949e 0%,
+            rgba(255, 255, 255, 0) 100%
+          );
+        }
+      }
+      p {
+        margin: 0;
+        font-size: $body;
+        color: $grayDark;
+      }
+    }
+    .divider {
+      height: 1px;
+      background-color: $blackSecondary;
+    }
+    .position {
+      padding: 48px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-bottom: 1px solid $blackSecondary;
+      flex: 1;
+      p {
+        color: $grayDark;
+        font-size: 24px;
+        font-style: italic;
+        margin: 0;
+      }
+      &-container {
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        align-items: flex-end;
+        .title {
+          color: $white;
+          font-size: $subTitle;
+          font-weight: bold;
+
+          text-align: start;
+        }
+        span {
+          color: $grayDark;
+          font-size: 24px;
+          word-break: keep-all;
+          text-align: right;
+        }
+      }
+      &.start {
+        padding-top: 0;
+      }
+      &.end {
+        padding-bottom: 0;
+        border-width: 0;
+      }
+    }
+    .skill-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 48px;
+      flex: 1;
+      width: 100%;
+      p {
+        font-size: $body;
+        font-weight: bold;
+        font-style: italic;
+        color: $grayDark;
+        margin: 0;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          right: -92px;
+          top: 16px;
+          width: 72px;
+          height: 1px;
+          background-color: $grayDark;
+        }
+      }
+      &-section {
+        width: 100%;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    &-container {
+      gap: 32px;
+      padding: 66px 24px;
+      .title {
+        gap: 24px;
+        h1 {
+          font-size: $subTitle;
+        }
+        p {
+          font-size: $caption;
+        }
+      }
+      .position {
+        padding: 24px 0;
+        p {
+          font-size: $caption;
+        }
+        &-container {
+          gap: 16px;
+          .title {
+            font-size: $body;
+          }
+          span {
+            font-size: $caption;
+          }
+        }
+      }
+      .skill-container {
+        gap: 32px;
+        p {
+          font-size: $caption;
+          &::before {
+            content: "";
+            position: absolute;
+            right: -62px;
+            top: 9px;
+            width: 42px;
+            height: 1px;
+            background-color: $grayDark;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 499px) {
+    &-container {
+      padding: 46px 24px;
+    }
+  }
+}

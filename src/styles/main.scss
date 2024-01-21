@@ -1,0 +1,46 @@
+@import "theme/variables";
+@import "theme/layout";
+@import "theme/hero";
+@import "theme/loading";
+@import "theme/work";
+@import "theme/experience";
+@import "theme/interest";
+@import "theme/shots";
+
+html {
+  height: 100%;
+  overflow-y: visible;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0px;
+  font-size: 14px;
+  line-height: 1.3 !important;
+  color: $black;
+  height: 100%;
+  background: $grayLight !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+  text-size-adjust: 100%;
+  word-wrap: break-word;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  cursor: none !important;
+  overflow-y: visible;
+  position: relative;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

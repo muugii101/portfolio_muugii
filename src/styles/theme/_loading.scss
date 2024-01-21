@@ -1,0 +1,21 @@
+.loading {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-color: $black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.6s;
+  z-index: 999;
+  span {
+    color: $white;
+    font-size: $h2;
+    text-align: center;
+    font-weight: bold;
+  }
+  &.end {
+    margin-top: -100vh;
+    border-radius: 100%;
+  }
+}

@@ -1,95 +1,229 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import { useState, useEffect, useRef } from "react";
+import { Button, Col, Row, message } from "antd";
+import { Experience, Hero, Interest, Loading, Shots, Work } from "@/components";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import Image from "next/image";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [displayText, setDisplayText] = useState("© Code by M-E");
+  const hoverText = "Munkh-Erdene T.";
+
+  const handleMouseEnter1 = () => {
+    setIsHovered(true);
+    setDisplayText(hoverText);
+  };
+
+  const handleMouseLeave1 = () => {
+    setIsHovered(false);
+    setDisplayText("© Code by M-E");
+  };
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setLoading(true);
+    }, 3500);
+
+    const timer2 = setTimeout(() => {
+      setShowLoading(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
+  const email = "me.tuul21@gmail.com";
+
+  const handleCopyEmail = () => {
+    navigator.clipboard
+      .writeText(email)
+      .then(() => {
+        message.open({
+          type: "success",
+          content: "Email copied!",
+        });
+      })
+      .catch((err) => {
+        message.open({
+          type: "error",
+          content: `Failed to copy email: ${err}`,
+        });
+      });
+  };
+
+  const toWorkRef = useRef<HTMLDivElement>(null);
+  const toExperienceRef = useRef<HTMLDivElement>(null);
+
+  const scrollToWork = () => {
+    if (toWorkRef.current) {
+      toWorkRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const scrollToExperience = () => {
+    if (toExperienceRef.current) {
+      toExperienceRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <>
+      {showLoading ? <Loading end={loading} /> : null}
+      {loading ? (
+        <>
+          <div className="layout-header">
+            <div className="layout-header-container">
+              <div
+                className="home"
+                onMouseEnter={handleMouseEnter1}
+                onMouseLeave={handleMouseLeave1}
+              >
+                <a>{displayText}</a>
+              </div>
+              <div className="menu">
+                <Button
+                  type="text"
+                  shape="round"
+                  className="menu-item"
+                  onClick={scrollToWork}
+                >
+                  <a>Work</a>
+                </Button>
+                <Button
+                  type="text"
+                  shape="round"
+                  className="menu-item"
+                  onClick={scrollToExperience}
+                >
+                  <a>Experience</a>
+                </Button>
+                <Button
+                  type="primary"
+                  shape="round"
+                  className="menu-item-contact"
+                  href="mailto:me.tuul21@gmail.com"
+                >
+                  <a>Email me</a>
+                </Button>
+              </div>
+            </div>
+          </div>
+          <Hero />
+          <section ref={toWorkRef}>
+            <Work />
+          </section>
+          <section ref={toExperienceRef}>
+            <Experience />
+          </section>
+          <Interest />
+          <Shots />
+          <div className="layout-footer">
+            <div className="layout-footer-container">
+              <Row gutter={[42, 42]}>
+                <Col xs={24} sm={24} md={14} lg={17}>
+                  <div className="name">
+                    <div className="name-info">
+                      <h1>I’m Munkh-Erdene</h1>
+                      <p>
+                        a digital product designer based in Ulaanbaatar, MGL.
+                      </p>
+                    </div>
+                    <div className="name-actions">
+                      <Button
+                        type="primary"
+                        size="large"
+                        href="mailto:me.tuul21@gmail.com"
+                      >
+                        <a>Email me</a>
+                        <Image
+                          height={24}
+                          width={24}
+                          alt="icon"
+                          src="/assets/images/icons/arrow.svg"
+                        />
+                      </Button>
+                      <Button size="large" onClick={handleCopyEmail}>
+                        <a>Copy email</a>
+                      </Button>
+                    </div>
+                  </div>
+                </Col>
+                <Col xs={24} sm={24} md={10} lg={7}>
+                  <div className="social">
+                    <Button
+                      type="text"
+                      href="https://www.linkedin.com/in/munkh-erdene-tuul-21b26418b/"
+                      target="_blank"
+                    >
+                      <a>Linkedin</a>
+                      <Image
+                        height={24}
+                        width={24}
+                        alt="icon"
+                        src="/assets/images/icons/arrow.svg"
+                      />
+                    </Button>
+                    <div className="divider" />
+                    <Button
+                      type="text"
+                      href="https://www.instagram.com/_dayswithcoffee_/"
+                      target="_blank"
+                    >
+                      <a>Instagram</a>
+                      <Image
+                        height={24}
+                        width={24}
+                        alt="icon"
+                        src="/assets/images/icons/arrow.svg"
+                      />
+                    </Button>
+                    <div className="divider" />
+                    <Button
+                      type="text"
+                      href="https://dribbble.com/muugii101"
+                      target="_blank"
+                    >
+                      <a>Dribbble</a>
+                      <Image
+                        height={24}
+                        width={24}
+                        alt="icon"
+                        src="/assets/images/icons/arrow.svg"
+                      />
+                    </Button>
+                    <div className="divider" />
+                    <Button
+                      type="text"
+                      href="https://www.behance.net/muugii101"
+                      target="_blank"
+                    >
+                      <a>Behance</a>
+                      <Image
+                        height={24}
+                        width={24}
+                        alt="icon"
+                        src="/assets/images/icons/arrow.svg"
+                      />
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+              <div className="copyright">
+                <span>Made by ❤️, Munkh-Erdene T.</span>
+                <span>©2024.</span>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
+    </>
+  );
 }

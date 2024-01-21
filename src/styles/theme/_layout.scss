@@ -1,0 +1,278 @@
+.layout {
+  position: relative;
+  padding-bottom: 705px;
+  &-header {
+    height: 98px;
+    display: flex;
+    background-color: $grayLight;
+    z-index: 1;
+    position: relative;
+    &-container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      .home {
+        cursor: pointer;
+        transition: 0.6s;
+        a {
+          transition: 0.6s;
+          font-size: $caption;
+          color: $black;
+          font-weight: bold;
+          padding: 16px 0;
+        }
+        &:hover {
+          opacity: 0.82;
+          text-decoration: none;
+          transform: skew(4deg, 4deg);
+          scale: 1.2;
+        }
+      }
+      .menu {
+        .ant-btn {
+          font-size: $caption !important;
+          font-weight: bold !important;
+        }
+        .ant-btn-text {
+          &:hover {
+            background-color: transparent !important;
+          }
+        }
+        &-item {
+          padding: 0 16px !important;
+          transition: 0.6s;
+
+          &::before {
+            transition: 0.6s;
+            content: "";
+            display: block;
+            position: absolute;
+            left: 100%;
+            right: 100%;
+            bottom: 5px;
+            height: 1px;
+            background-color: transparent;
+          }
+          &-contact {
+            margin-left: 16px;
+          }
+          &:hover {
+            opacity: 0.92;
+            text-decoration: none;
+            transform: skew(4deg, 4deg);
+            &::before {
+              right: 22px;
+              left: 22px;
+              background-color: $black;
+            }
+          }
+        }
+      }
+    }
+  }
+  &-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    &-container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 140px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 52px;
+      min-height: 705px;
+      .name {
+        display: flex;
+        flex-direction: column;
+        gap: 52px;
+        align-items: flex-start;
+        &-info {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+          align-items: flex-start;
+          h1 {
+            font-size: $h2;
+            font-weight: bold;
+            margin: 0;
+            position: relative;
+            &::after {
+              content: "";
+              position: absolute;
+              right: -102px;
+              top: 30px;
+              height: 1px;
+              width: 72px;
+              background-color: $grayDark;
+            }
+          }
+          p {
+            margin: 0;
+            font-size: $subTitle;
+            font-style: italic;
+            color: $grayDark;
+          }
+        }
+        &-actions {
+          display: flex;
+          gap: 16px;
+          pointer-events: all;
+          .ant-btn {
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+          }
+        }
+      }
+      .social {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        pointer-events: all;
+        .divider {
+          height: 1px;
+          background-color: $strokeDark;
+        }
+        .ant-btn {
+          color: $black;
+          font-size: $body;
+          font-style: italic;
+          padding: 0;
+          min-height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          transition: 0.6s;
+          a {
+            transition: 0.6s;
+            position: relative;
+            &::before {
+              transition: 0.6s;
+              content: "";
+              display: block;
+              position: absolute;
+              left: 100%;
+              right: 100%;
+              bottom: -5px;
+              height: 1px;
+              background-color: transparent;
+            }
+          }
+          &:hover {
+            background-color: transparent !important;
+            a {
+              opacity: 0.92;
+              text-decoration: none;
+              transform: skew(4deg, 4deg);
+              &::before {
+                right: 22px;
+                left: 22px;
+                background-color: $black;
+              }
+            }
+            img {
+              filter: invert(100%) sepia(63%) saturate(0%) hue-rotate(246deg)
+                brightness(87%) contrast(156%);
+            }
+          }
+        }
+      }
+      .copyright {
+        margin-top: auto;
+        display: flex;
+        gap: 24;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        span {
+          transition: 0.6s;
+          font-size: $caption;
+          color: $grayDark;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    &-footer {
+      &-container {
+        .name {
+          &-info {
+            h1 {
+              &::after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    padding-bottom: 546px;
+    &-footer {
+      &-container {
+        padding: 42px 24px;
+        gap: 24px;
+        min-height: 546px;
+        .name {
+          gap: 16px;
+          &-info {
+            gap: 12px;
+            h1 {
+              font-size: $subTitle;
+            }
+            p {
+              font-size: $caption;
+            }
+          }
+          &-actions {
+            flex-wrap: wrap;
+            .ant-btn {
+              min-width: auto;
+              height: 46px;
+            }
+          }
+        }
+        .social {
+          gap: 6px;
+          .ant-btn {
+            font-size: $caption;
+          }
+        }
+        .copyright {
+          gap: 16px;
+          span {
+            font-size: $small;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 520px) {
+    &-header {
+      height: auto;
+      &-container {
+        padding: 24px;
+        .menu {
+          &-item {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
