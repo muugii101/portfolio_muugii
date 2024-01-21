@@ -13,7 +13,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Portfolio of Product designer & Developer Munkh-Erdene",
-  description: "a UI/UX designer & Developer based in Ulaanbaatar, Mongolia.",
+  description:
+    "a Digital product designer & Developer based in Ulaanbaatar, Mongolia.",
 };
 
 export default function RootLayout({
