@@ -117,7 +117,7 @@ export default function Home() {
                   className="menu-item"
                   onClick={scrollToWork}
                 >
-                  <a>Work</a>
+                  Work
                 </Button>
                 <Button
                   type="text"
@@ -125,7 +125,7 @@ export default function Home() {
                   className="menu-item"
                   onClick={scrollToExperience}
                 >
-                  <a>Experience</a>
+                  Experience
                 </Button>
                 <Button
                   type="text"
@@ -133,7 +133,7 @@ export default function Home() {
                   className="menu-item"
                   onClick={scrollToContact}
                 >
-                  <a>Contact</a>
+                  Contact
                 </Button>
                 <Button
                   type="primary"
@@ -141,7 +141,7 @@ export default function Home() {
                   className="menu-item-contact"
                   href="mailto:me.tuul21@gmail.com"
                 >
-                  <a>Email me</a>
+                  Email me
                 </Button>
               </div>
             </div>
@@ -206,7 +206,7 @@ export default function Home() {
                         size="large"
                         href="mailto:me.tuul21@gmail.com"
                       >
-                        <a>Email me</a>
+                        Email me
                         <Image
                           height={24}
                           width={24}
@@ -215,7 +215,7 @@ export default function Home() {
                         />
                       </Button>
                       <Button size="large" onClick={handleCopyEmail}>
-                        <a>Copy email</a>
+                        Copy email
                       </Button>
                     </div>
                   </div>
@@ -227,7 +227,7 @@ export default function Home() {
                       href="https://www.linkedin.com/in/munkh-erdene-tuul-21b26418b/"
                       target="_blank"
                     >
-                      <a>Linkedin</a>
+                      Linkedin
                       <Image
                         height={24}
                         width={24}
@@ -241,7 +241,7 @@ export default function Home() {
                       href="https://www.instagram.com/_dayswithcoffee_/"
                       target="_blank"
                     >
-                      <a>Instagram</a>
+                      Instagram
                       <Image
                         height={24}
                         width={24}
@@ -255,7 +255,7 @@ export default function Home() {
                       href="https://dribbble.com/muugii101"
                       target="_blank"
                     >
-                      <a>Dribbble</a>
+                      Dribbble
                       <Image
                         height={24}
                         width={24}
@@ -269,7 +269,7 @@ export default function Home() {
                       href="https://www.behance.net/muugii101"
                       target="_blank"
                     >
-                      <a>Behance</a>
+                      Behance
                       <Image
                         height={24}
                         width={24}

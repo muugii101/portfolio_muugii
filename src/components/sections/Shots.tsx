@@ -63,7 +63,10 @@ export function Shots() {
       <div className="shots-container">
         <div className="title">
           <div className="title-body">
-            <Row gutter={[42, 32]} style={{ width: "100%" }}>
+            <Row
+              gutter={[{ xs: 0, sm: 0, md: 0, lg: 42, xl: 42 }, 32]}
+              style={{ width: "100%" }}
+            >
               <Col
                 xs={24}
                 sm={24}

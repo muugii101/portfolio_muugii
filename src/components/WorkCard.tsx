@@ -57,7 +57,7 @@ export function WorkCard({ data }: Props) {
         src={data?.image}
         className={`work-image ${data?.web ? "web" : ""}`}
       />
-      <a className="detail">
+      <div className="detail">
         <h1>{data?.name}</h1>
         <p>{data?.desc}</p>
         <div className="tags">
@@ -119,7 +119,7 @@ export function WorkCard({ data }: Props) {
             </Button>
           )}
         </div>
-      </a>
+      </div>
     </div>
   );
 }

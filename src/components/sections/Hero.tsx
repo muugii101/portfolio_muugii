@@ -11,7 +11,7 @@ export function Hero() {
           <br />
           I’m <strong>Munkh-Erdene</strong>
         </h1>
-        <Row gutter={[{ xs: 24, sm: 32, md: 92 }, 32]}>
+        <Row gutter={[{ xs: 24, sm: 32, md: 42 }, 32]}>
           <Col
             xs={{ order: 2, span: 24 }}
             sm={{ order: 2, span: 24 }}
@@ -53,6 +53,7 @@ export function Hero() {
               width={560}
               alt="avatar"
               src="/assets/images/muugii_back.png"
+              priority={true}
             />
           </Col>
         </Row>
