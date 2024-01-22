@@ -2,6 +2,7 @@
   z-index: 1;
   position: relative;
   background-color: $grayLight;
+  overflow: hidden;
   &-container {
     width: 100%;
     max-width: 1280px;
@@ -145,7 +146,6 @@
       }
     }
   }
-
   @media (max-width: 400px) {
     &-container {
       padding: 46px 24px;

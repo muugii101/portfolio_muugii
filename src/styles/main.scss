@@ -9,9 +9,10 @@
 
 html {
   height: 100%;
-  overflow-y: visible;
-  position: relative;
-  overflow-x: hidden;
+  // overflow-y: visible;
+  // position: relative;
+  // overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -31,9 +32,10 @@ body {
   flex: 1;
   flex-direction: column;
   cursor: none !important;
-  overflow-y: visible;
-  position: relative;
-  overflow-x: hidden;
+  scroll-behavior: smooth;
+  // overflow-y: visible;
+  // position: relative;
+  // overflow-x: hidden;
 }
 
 a {

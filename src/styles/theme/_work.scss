@@ -3,6 +3,7 @@
   border-radius: 62px 62px 0px 0px;
   z-index: 1;
   position: relative;
+  margin-top: -24px;
   &-container {
     width: 100%;
     padding: 100px 0;
@@ -45,6 +46,7 @@
         margin: 0;
         font-size: $body;
         color: $grayDark;
+        line-height: 1.5;
       }
     }
     .card {
@@ -259,10 +261,12 @@
   @media (max-width: 499px) {
     &-container {
       padding: 46px 0;
+      border-radius: 24px 24px 0px 0px;
       .card {
-        min-width: 342px;
-        height: 362px;
+        min-width: 322px;
+        height: 332px;
         padding: 24px;
+        gap: 12px;
         h1 {
           font-size: $body;
         }
@@ -279,18 +283,32 @@
           top: 24px;
         }
         .work-image {
-          height: 280px;
-          bottom: -56px;
-          right: -32px;
+          height: 242px;
+          bottom: -52px;
+          right: -24px;
           &.web {
-            height: 280px;
-            bottom: -82px;
+            height: 240px;
+            bottom: -52px;
             right: -46px;
           }
         }
         .detail {
           padding: 24px;
           gap: 12px;
+        }
+      }
+    }
+  }
+  @media (max-width: 400px) {
+    &-container {
+      .title {
+        gap: 16px;
+        h1 {
+          font-size: $body;
+          padding-bottom: 16px;
+        }
+        p {
+          font-size: $caption;
         }
       }
     }

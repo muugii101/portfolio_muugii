@@ -4,6 +4,7 @@
   // max-width: 50vw;
   z-index: 1;
   position: relative;
+  overflow: hidden;
   &-container {
     padding: 100px 0;
     display: flex;
@@ -315,6 +316,49 @@
                 min-width: 242px !important;
                 img {
                   height: 132px !important;
+                  min-width: 242px !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 400px) {
+    &-container {
+      gap: 6px;
+      .title {
+        &-body {
+          .text-container {
+            gap: 16px;
+            h1 {
+              font-size: $body;
+              padding-bottom: 16px;
+            }
+            p {
+              font-size: $caption;
+            }
+            .buttons {
+              flex-direction: column;
+              gap: 12px;
+              .divider {
+                height: 1px;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+      .shots-image {
+        &-body {
+          .images {
+            .row {
+              .image {
+                height: 152px !important;
+                min-width: 242px !important;
+                img {
+                  height: 152px !important;
                   min-width: 242px !important;
                 }
               }

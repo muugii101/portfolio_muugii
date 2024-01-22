@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button, Col, Row, message } from "antd";
 import { Experience, Hero, Interest, Loading, Shots, Work } from "@/components";
 import gsap from "gsap";
@@ -16,15 +16,13 @@ export default function Home() {
   const [displayText, setDisplayText] = useState("© Code by M-E");
   const hoverText = "Munkh-Erdene T.";
 
-  const handleMouseEnter1 = () => {
-    setIsHovered(true);
-    setDisplayText(hoverText);
-  };
+  const [onScrolled, setOnScrolled] = useState<boolean>(false);
 
-  const handleMouseLeave1 = () => {
-    setIsHovered(false);
-    setDisplayText("© Code by M-E");
-  };
+  const toWorkRef = useRef<HTMLDivElement>(null);
+  const toExperienceRef = useRef<HTMLDivElement>(null);
+  const toContactRef = useRef<HTMLDivElement>(null);
+
+  const email = "me.tuul21@gmail.com";
 
   useEffect(() => {
     const timer1 = setTimeout(() => {
@@ -34,14 +32,32 @@ export default function Home() {
     const timer2 = setTimeout(() => {
       setShowLoading(false);
     }, 4000);
-
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
   }, []);
 
-  const email = "me.tuul21@gmail.com";
+  useEffect(() => {
+    const handleShadow = () => {
+      if (window.scrollY > 300) {
+        setOnScrolled(true);
+      } else {
+        setOnScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleShadow);
+  }, []);
+
+  const handleMouseEnter1 = () => {
+    setIsHovered(true);
+    setDisplayText(hoverText);
+  };
+
+  const handleMouseLeave1 = () => {
+    setIsHovered(false);
+    setDisplayText("© Code by M-E");
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard
@@ -60,18 +76,24 @@ export default function Home() {
       });
   };
 
-  const toWorkRef = useRef<HTMLDivElement>(null);
-  const toExperienceRef = useRef<HTMLDivElement>(null);
-
   const scrollToWork = () => {
     if (toWorkRef.current) {
       toWorkRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   const scrollToExperience = () => {
     if (toExperienceRef.current) {
       toExperienceRef.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const scrollToContact = () => {
+    toContactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const toTopPress = () => {
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -106,6 +128,14 @@ export default function Home() {
                   <a>Experience</a>
                 </Button>
                 <Button
+                  type="text"
+                  shape="round"
+                  className="menu-item"
+                  onClick={scrollToContact}
+                >
+                  <a>Contact</a>
+                </Button>
+                <Button
                   type="primary"
                   shape="round"
                   className="menu-item-contact"
@@ -125,6 +155,40 @@ export default function Home() {
           </section>
           <Interest />
           <Shots />
+          <div ref={toContactRef} />
+          <div className={`layout-menu  ${onScrolled ? "visible" : ""}`}>
+            <div className="layout-menu-container">
+              <div className="menus">
+                <Button type="primary" shape="round" onClick={scrollToWork}>
+                  Work
+                </Button>
+                <Button
+                  type="primary"
+                  shape="round"
+                  onClick={scrollToExperience}
+                >
+                  Experience
+                </Button>
+                <Button type="primary" shape="round" onClick={scrollToContact}>
+                  Contact
+                </Button>
+                <Button
+                  className="home"
+                  type="primary"
+                  shape="circle"
+                  onClick={toTopPress}
+                  icon={
+                    <Image
+                      height={24}
+                      width={24}
+                      alt="icon"
+                      src="/assets/images/icons/top.svg"
+                    />
+                  }
+                />
+              </div>
+            </div>
+          </div>
           <div className="layout-footer">
             <div className="layout-footer-container">
               <Row gutter={[42, 42]}>
@@ -217,7 +281,7 @@ export default function Home() {
                 </Col>
               </Row>
               <div className="copyright">
-                <span>Made by ❤️, Munkh-Erdene T.</span>
+                <span>Made by ❤️ ・ Munkh-Erdene T.</span>
                 <span>©2024.</span>
               </div>
             </div>

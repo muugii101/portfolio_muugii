@@ -47,6 +47,7 @@
         margin: 0;
         font-size: $body;
         color: $grayDark;
+        line-height: 1.5;
       }
     }
     .divider {
@@ -170,6 +171,20 @@
   @media (max-width: 499px) {
     &-container {
       padding: 46px 24px;
+    }
+  }
+  @media (max-width: 400px) {
+    &-container {
+      .title {
+        gap: 16px;
+        h1 {
+          font-size: $body;
+          padding-bottom: 16px;
+        }
+        p {
+          font-size: $caption;
+        }
+      }
     }
   }
 }

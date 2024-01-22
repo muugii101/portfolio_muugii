@@ -12,7 +12,7 @@ export function Interest() {
             </div>
           </Col>
           <Col xs={24} sm={24} md={24} lg={16} xl={16}>
-            <Row gutter={[12, 12]}>
+            <Row gutter={[12, 8]}>
               <Col xs={12} sm={8} md={8} lg={6} xl={6}>
                 <Image
                   height={300}

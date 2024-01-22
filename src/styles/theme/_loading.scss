@@ -18,4 +18,9 @@
     margin-top: -100vh;
     border-radius: 100%;
   }
+  @media (max-width: 600px) {
+    span {
+      font-size: $title;
+    }
+  }
 }
