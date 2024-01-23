@@ -3,5 +3,6 @@ export * from "./CustomCursor";
 export * from "./Loading";
 export * from "./WorkCard";
 
-// Section
+// Folders
 export * from "./sections";
+export * from "./layout";

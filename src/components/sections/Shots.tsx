@@ -16,7 +16,6 @@ export function Shots() {
 
       if (delta > 0) {
         if (container.scrollLeft < maxScrollLeft) {
-          // Scroll horizontally when not at the end
           const newScrollPosition =
             container.scrollLeft + delta * scrollSpeedMultiplier;
           container.scrollTo({
@@ -84,8 +83,8 @@ export function Shots() {
                   >
                     Visit my DRIBBBLE
                     <Image
-                      height={24}
-                      width={24}
+                      height={22}
+                      width={22}
                       alt="icon"
                       src="/assets/images/icons/arrow.svg"
                     />
@@ -98,8 +97,8 @@ export function Shots() {
                   >
                     Visit my BEHANCE
                     <Image
-                      height={24}
-                      width={24}
+                      height={22}
+                      width={22}
                       alt="icon"
                       src="/assets/images/icons/arrow.svg"
                     />

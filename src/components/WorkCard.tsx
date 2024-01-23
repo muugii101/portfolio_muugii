@@ -24,12 +24,7 @@ interface Props {
 
 export function WorkCard({ data }: Props) {
   return (
-    <div
-      className="card"
-      style={{ backgroundColor: data?.backColor }}
-      //   className={`card ${detail ? "see-detail" : ""}`}
-      //   onClick={() => setDetail(!detail)}
-    >
+    <div className="card" style={{ backgroundColor: data?.backColor }}>
       <div className="circle" style={{ backgroundColor: data?.circleColor }} />
       <h1>{data?.name}</h1>
       <p>{data?.desc}</p>

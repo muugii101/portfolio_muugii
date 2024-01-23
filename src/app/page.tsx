@@ -6,9 +6,17 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { Button, Col, Row, message } from "antd";
-import { Experience, Hero, Interest, Loading, Shots, Work } from "@/components";
-import Image from "next/image";
+import {
+  Experience,
+  Footer,
+  Header,
+  Hero,
+  Interest,
+  Loading,
+  Menu,
+  Shots,
+  Work,
+} from "@/components";
 import throttle from "lodash/throttle";
 
 export default function Home() {
@@ -17,30 +25,19 @@ export default function Home() {
   const [workSectionActive, setWorkSectionActive] = useState(false);
   const [expSectionActive, setExpSectionActive] = useState(false);
 
-  const [isHovered, setIsHovered] = useState(false);
-  const [displayText, setDisplayText] = useState("© Code by M-E");
-  const hoverText = "Munkh-Erdene T.";
-
-  const [onScrolled, setOnScrolled] = useState<boolean>(false);
-
   const toWorkRef = useRef<HTMLDivElement>(null);
   const toExperienceRef = useRef<HTMLDivElement>(null);
   const toContactRef = useRef<HTMLDivElement>(null);
 
-  const email = "me.tuul21@gmail.com";
-
   const sections = useMemo(() => {
-    return ["section1", "section2"];
+    return ["sectionWork", "sectionExperience"];
   }, []);
-
-  const [scrollPosition, setScrollPosition] = useState(0);
 
   const throttledHandleScroll = useMemo(
     () =>
       throttle(() => {
         const currentScrollPosition =
           window.scrollY || document.documentElement.scrollTop;
-        setScrollPosition(currentScrollPosition);
 
         let isWorkSectionActive = false;
         let isExpSectionActive = false;
@@ -52,13 +49,15 @@ export default function Home() {
               section.getBoundingClientRect().top + currentScrollPosition;
             const sectionBottom = sectionTop + section.offsetHeight;
             if (
-              sectionTop <= currentScrollPosition + window.innerHeight / 8 &&
+              sectionTop <= currentScrollPosition + window.innerHeight / 6 &&
               sectionBottom > currentScrollPosition
             ) {
-              if (sectionId === "section1") {
+              if (sectionId === "sectionWork") {
                 isWorkSectionActive = true;
-              } else if (sectionId === "section2") {
+                isExpSectionActive = false;
+              } else if (sectionId === "sectionExperience") {
                 isExpSectionActive = true;
+                isWorkSectionActive = false;
               }
             }
           }
@@ -89,17 +88,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const handleShadow = () => {
-      if (window.scrollY > 300) {
-        setOnScrolled(true);
-      } else {
-        setOnScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleShadow);
-  }, []);
-
-  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -107,33 +95,6 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
-
-  const handleMouseEnter1 = () => {
-    setIsHovered(true);
-    setDisplayText(hoverText);
-  };
-
-  const handleMouseLeave1 = () => {
-    setIsHovered(false);
-    setDisplayText("© Code by M-E");
-  };
-
-  const handleCopyEmail = () => {
-    navigator.clipboard
-      .writeText(email)
-      .then(() => {
-        message.open({
-          type: "success",
-          content: "Email copied!",
-        });
-      })
-      .catch((err) => {
-        message.open({
-          type: "error",
-          content: `Failed to copy email: ${err}`,
-        });
-      });
-  };
 
   const scrollToWork = () => {
     if (toWorkRef.current) {
@@ -151,206 +112,34 @@ export default function Home() {
     toContactRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const toTopPress = () => {
-    window.scrollTo(0, 0);
-  };
-
   return (
     <>
       {showLoading ? <Loading end={loading} /> : null}
       {loading ? (
         <>
-          <div className="layout-header">
-            <div className="layout-header-container">
-              <div
-                className="home"
-                onMouseEnter={handleMouseEnter1}
-                onMouseLeave={handleMouseLeave1}
-              >
-                <a>{displayText}</a>
-              </div>
-              <div className="menu">
-                <Button
-                  type="text"
-                  shape="round"
-                  className="menu-item"
-                  onClick={scrollToWork}
-                >
-                  Work
-                </Button>
-                <Button
-                  type="text"
-                  shape="round"
-                  className="menu-item"
-                  onClick={scrollToExperience}
-                >
-                  Experience
-                </Button>
-                <Button
-                  type="text"
-                  shape="round"
-                  className="menu-item"
-                  onClick={scrollToContact}
-                >
-                  Contact
-                </Button>
-                <Button
-                  type="primary"
-                  shape="round"
-                  className="menu-item-contact"
-                  href="mailto:me.tuul21@gmail.com"
-                >
-                  Email me
-                </Button>
-              </div>
-            </div>
-          </div>
+          <Header
+            scrollToWorkPress={scrollToWork}
+            scrollToExperiencePress={scrollToExperience}
+            scrollToContactPress={scrollToContact}
+          />
           <Hero />
-          <section id="section1" ref={toWorkRef}>
+          <section id="sectionWork" ref={toWorkRef}>
             <Work />
           </section>
-          <section id="section2" ref={toExperienceRef}>
+          <section id="sectionExperience" ref={toExperienceRef}>
             <Experience />
           </section>
           <Interest />
           <Shots />
           <div ref={toContactRef} />
-          <div className={`layout-menu  ${onScrolled ? "visible" : ""}`}>
-            <div className="layout-menu-container">
-              <div className="menus">
-                <Button
-                  className={` ${workSectionActive ? "active" : ""}`}
-                  type="primary"
-                  shape="round"
-                  onClick={scrollToWork}
-                >
-                  Work
-                </Button>
-                <Button
-                  className={` ${expSectionActive ? "active" : ""}`}
-                  type="primary"
-                  shape="round"
-                  onClick={scrollToExperience}
-                >
-                  Experience
-                </Button>
-                <Button type="primary" shape="round" onClick={scrollToContact}>
-                  Contact
-                </Button>
-                <Button
-                  className="home"
-                  type="primary"
-                  shape="circle"
-                  onClick={toTopPress}
-                  icon={
-                    <Image
-                      height={24}
-                      width={24}
-                      alt="icon"
-                      src="/assets/images/icons/top.svg"
-                    />
-                  }
-                />
-              </div>
-            </div>
-          </div>
-          <div className="layout-footer">
-            <div className="layout-footer-container">
-              <Row gutter={[42, 42]}>
-                <Col xs={24} sm={24} md={14} lg={17}>
-                  <div className="name">
-                    <div className="name-info">
-                      <h1>I’m Munkh-Erdene</h1>
-                      <p>
-                        a digital product designer based in Ulaanbaatar, MGL.
-                      </p>
-                    </div>
-                    <div className="name-actions">
-                      <Button
-                        type="primary"
-                        size="large"
-                        href="mailto:me.tuul21@gmail.com"
-                      >
-                        Email me
-                        <Image
-                          height={24}
-                          width={24}
-                          alt="icon"
-                          src="/assets/images/icons/arrow.svg"
-                        />
-                      </Button>
-                      <Button size="large" onClick={handleCopyEmail}>
-                        Copy email
-                      </Button>
-                    </div>
-                  </div>
-                </Col>
-                <Col xs={24} sm={24} md={10} lg={7}>
-                  <div className="social">
-                    <Button
-                      type="text"
-                      href="https://www.linkedin.com/in/munkh-erdene-tuul-21b26418b/"
-                      target="_blank"
-                    >
-                      Linkedin
-                      <Image
-                        height={24}
-                        width={24}
-                        alt="icon"
-                        src="/assets/images/icons/arrow.svg"
-                      />
-                    </Button>
-                    <div className="divider" />
-                    <Button
-                      type="text"
-                      href="https://www.instagram.com/_dayswithcoffee_/"
-                      target="_blank"
-                    >
-                      Instagram
-                      <Image
-                        height={24}
-                        width={24}
-                        alt="icon"
-                        src="/assets/images/icons/arrow.svg"
-                      />
-                    </Button>
-                    <div className="divider" />
-                    <Button
-                      type="text"
-                      href="https://dribbble.com/muugii101"
-                      target="_blank"
-                    >
-                      Dribbble
-                      <Image
-                        height={24}
-                        width={24}
-                        alt="icon"
-                        src="/assets/images/icons/arrow.svg"
-                      />
-                    </Button>
-                    <div className="divider" />
-                    <Button
-                      type="text"
-                      href="https://www.behance.net/muugii101"
-                      target="_blank"
-                    >
-                      Behance
-                      <Image
-                        height={24}
-                        width={24}
-                        alt="icon"
-                        src="/assets/images/icons/arrow.svg"
-                      />
-                    </Button>
-                  </div>
-                </Col>
-              </Row>
-              <div className="copyright">
-                <span>Made by ❤️ ・ Munkh-Erdene T.</span>
-                <span>©2024.</span>
-              </div>
-            </div>
-          </div>
+          <Menu
+            workSectionActive={workSectionActive}
+            expSectionActive={expSectionActive}
+            scrollToWorkPress={scrollToWork}
+            scrollToExperiencePress={scrollToExperience}
+            scrollToContactPress={scrollToContact}
+          />
+          <Footer />
         </>
       ) : null}
     </>

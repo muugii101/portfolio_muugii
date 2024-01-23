@@ -1,4 +1,3 @@
-// Common
 export * from "./Hero";
 export * from "./Work";
 export * from "./Experience";
