@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import { CustomCursor } from "@/components";
+
 import "react-horizontal-scrolling-menu/dist/styles.css";
 
 import theme from "@/utils/themeConfig";

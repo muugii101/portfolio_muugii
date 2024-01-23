@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useRef, useEffect } from "react";
-import Image from "next/image";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, Image } from "antd";
 
 export function Shots() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
