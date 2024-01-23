@@ -12,7 +12,7 @@ import "react-custom-cursors/dist/index.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfolio of Product designer & Developer Munkh-Erdene",
+  title: "Portfolio of Munkh-Erdene",
   description:
     "a Digital product designer & Developer based in Ulaanbaatar, Mongolia.",
 };

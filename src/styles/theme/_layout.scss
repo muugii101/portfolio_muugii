@@ -157,7 +157,7 @@
           align-items: center;
           justify-content: space-between;
           transition: 0.6s;
-          a {
+          span {
             transition: 0.6s;
             position: relative;
             &::before {
@@ -174,7 +174,7 @@
           }
           &:hover {
             background-color: transparent !important;
-            a {
+            span {
               opacity: 0.92;
               text-decoration: none;
               transform: skew(4deg, 4deg);
@@ -245,12 +245,67 @@
           width: 66px;
           min-width: 66px !important;
           box-shadow: $white-shadow-medium !important;
+          img {
+            transition: 0.6s;
+          }
+          &:hover {
+            background-color: transparent !important;
+            img {
+              transform: scale(1.2);
+            }
+            span {
+              &::before {
+                display: none;
+              }
+            }
+          }
         }
         .ant-btn {
           box-shadow: none;
           padding: 0 16px;
           font-size: $caption;
           background-color: transparent;
+          span {
+            transition: 0.6s;
+            position: relative;
+            &::before {
+              transition: 0.6s;
+              content: "";
+              display: block;
+              position: absolute;
+              left: 100%;
+              right: 100%;
+              bottom: -5px;
+              height: 1px;
+              background-color: transparent;
+            }
+          }
+          &:hover {
+            background-color: transparent !important;
+            span {
+              opacity: 0.92;
+              text-decoration: none;
+              transform: skew(4deg, 4deg);
+              &::before {
+                right: 6px;
+                left: 6px;
+                background-color: $white;
+              }
+            }
+          }
+          &.active {
+            background-color: transparent !important;
+            span {
+              opacity: 0.92;
+              text-decoration: none;
+              transform: skew(4deg, 4deg);
+              &::before {
+                right: 6px;
+                left: 6px;
+                background-color: $white;
+              }
+            }
+          }
         }
       }
     }

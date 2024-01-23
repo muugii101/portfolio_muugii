@@ -1,16 +1,21 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { Button, Col, Row, message } from "antd";
 import { Experience, Hero, Interest, Loading, Shots, Work } from "@/components";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
-
-gsap.registerPlugin(ScrollTrigger);
+import throttle from "lodash/throttle";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
+  const [workSectionActive, setWorkSectionActive] = useState(false);
+  const [expSectionActive, setExpSectionActive] = useState(false);
 
   const [isHovered, setIsHovered] = useState(false);
   const [displayText, setDisplayText] = useState("© Code by M-E");
@@ -23,6 +28,51 @@ export default function Home() {
   const toContactRef = useRef<HTMLDivElement>(null);
 
   const email = "me.tuul21@gmail.com";
+
+  const sections = useMemo(() => {
+    return ["section1", "section2"];
+  }, []);
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const throttledHandleScroll = useMemo(
+    () =>
+      throttle(() => {
+        const currentScrollPosition =
+          window.scrollY || document.documentElement.scrollTop;
+        setScrollPosition(currentScrollPosition);
+
+        let isWorkSectionActive = false;
+        let isExpSectionActive = false;
+
+        sections.forEach((sectionId) => {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            const sectionTop =
+              section.getBoundingClientRect().top + currentScrollPosition;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (
+              sectionTop <= currentScrollPosition + window.innerHeight / 8 &&
+              sectionBottom > currentScrollPosition
+            ) {
+              if (sectionId === "section1") {
+                isWorkSectionActive = true;
+              } else if (sectionId === "section2") {
+                isExpSectionActive = true;
+              }
+            }
+          }
+        });
+
+        setWorkSectionActive(isWorkSectionActive);
+        setExpSectionActive(isExpSectionActive);
+      }, 100),
+    [sections]
+  );
+
+  const handleScroll = useCallback(throttledHandleScroll, [
+    throttledHandleScroll,
+  ]);
 
   useEffect(() => {
     const timer1 = setTimeout(() => {
@@ -48,6 +98,15 @@ export default function Home() {
     };
     window.addEventListener("scroll", handleShadow);
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      handleScroll.cancel();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
 
   const handleMouseEnter1 = () => {
     setIsHovered(true);
@@ -147,10 +206,10 @@ export default function Home() {
             </div>
           </div>
           <Hero />
-          <section ref={toWorkRef}>
+          <section id="section1" ref={toWorkRef}>
             <Work />
           </section>
-          <section ref={toExperienceRef}>
+          <section id="section2" ref={toExperienceRef}>
             <Experience />
           </section>
           <Interest />
@@ -159,10 +218,16 @@ export default function Home() {
           <div className={`layout-menu  ${onScrolled ? "visible" : ""}`}>
             <div className="layout-menu-container">
               <div className="menus">
-                <Button type="primary" shape="round" onClick={scrollToWork}>
+                <Button
+                  className={` ${workSectionActive ? "active" : ""}`}
+                  type="primary"
+                  shape="round"
+                  onClick={scrollToWork}
+                >
                   Work
                 </Button>
                 <Button
+                  className={` ${expSectionActive ? "active" : ""}`}
                   type="primary"
                   shape="round"
                   onClick={scrollToExperience}
