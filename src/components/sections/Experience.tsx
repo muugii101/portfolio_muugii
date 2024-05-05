@@ -22,6 +22,13 @@ export function Experience() {
             </Col>
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
               <div className="position start">
+                <p>M Bank</p>
+                <div className="position-container">
+                  <span className="title">Product designer</span>
+                  <span>2024</span>
+                </div>
+              </div>
+              <div className="position start">
                 <p>Tab Solution</p>
                 <div className="position-container">
                   <span className="title">Senior designer</span>

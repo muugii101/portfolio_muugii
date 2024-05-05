@@ -4,58 +4,19 @@ import React, { useRef, useEffect } from "react";
 import { Button, Col, Row, Image } from "antd";
 
 export function Shots() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const scrollSpeedMultiplier = 5;
-  const scrollHorizontally = (e: WheelEvent) => {
-    const delta = e.deltaY;
+  const element: HTMLElement | null = document.querySelector("#containers");
 
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+  if (element) {
+    element.addEventListener("wheel", (event: WheelEvent) => {
+      event.preventDefault();
 
-      if (delta > 0) {
-        if (container.scrollLeft < maxScrollLeft) {
-          const newScrollPosition =
-            container.scrollLeft + delta * scrollSpeedMultiplier;
-          container.scrollTo({
-            left: newScrollPosition,
-            behavior: "smooth",
-          });
-          e.preventDefault();
-        }
-      } else if (delta < 0) {
-        if (container.scrollLeft > 0) {
-          container.scrollTo({
-            left: 0,
-            behavior: "smooth",
-          });
-          e.preventDefault();
-        }
+      if (element.scrollBy) {
+        element.scrollBy({
+          left: event.deltaY < 0 ? -1.5 : 1.5,
+        });
       }
-    }
-  };
-
-  const bindHorizontalMouseWheel = (element: HTMLDivElement) => {
-    if (element.addEventListener) {
-      element.addEventListener("wheel", scrollHorizontally, false);
-    } else if ((element as any).attachEvent) {
-      (element as any).attachEvent("onwheel", scrollHorizontally);
-    }
-  };
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      bindHorizontalMouseWheel(scrollContainer);
-    }
-
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener("wheel", scrollHorizontally);
-      }
-    };
-  }, []);
-
+    });
+  }
   return (
     <div className="shots">
       <div className="shots-container">
@@ -107,7 +68,7 @@ export function Shots() {
             </Row>
           </div>
         </div>
-        <div className="shots-image" ref={scrollContainerRef}>
+        <div className="shots-image" id="containers">
           <div className="shots-image-body">
             <Row gutter={[42, 32]}>
               <Col xs={24} sm={24} md={24} lg={8} xl={8}></Col>
