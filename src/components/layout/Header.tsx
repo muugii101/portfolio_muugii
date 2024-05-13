@@ -14,7 +14,7 @@ export function Header({
   scrollToContactPress,
 }: Props) {
   const [isHovered, setIsHovered] = useState(false);
-  const [displayText, setDisplayText] = useState("© Code by M-E");
+  const [displayText, setDisplayText] = useState("©ME");
   const hoverText = "Munkh-Erdene T.";
 
   const handleMouseEnter1 = () => {
@@ -24,7 +24,7 @@ export function Header({
 
   const handleMouseLeave1 = () => {
     setIsHovered(false);
-    setDisplayText("© Code by M-E");
+    setDisplayText("©ME");
   };
 
   return (
